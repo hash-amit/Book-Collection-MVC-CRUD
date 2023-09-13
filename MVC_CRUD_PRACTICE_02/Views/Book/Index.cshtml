@@ -1,0 +1,69 @@
+﻿@*-------------*@
+
+@model IEnumerable<MVC_CRUD_PRACTICE_02.Models.BookModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>Index</h2>*@
+
+<div class="d-flex justify-content-between align-items-center">
+    <div>
+        @Html.ActionLink("Create New", "Create")
+    </div>
+    <div class="ml-auto">
+        @using (Html.BeginForm("Search", "Book", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            <div class="input-group">
+                <input type="text" class="form-control" name="searchPhrase" placeholder="Search by Book Name">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default">Search</button>
+                </span>
+            </div>
+        }
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BookName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ISBN_10)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NetQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AuthorName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN_10)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NetQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthorName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.BookID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.BookID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.BookID })
+            </td>
+        </tr>
+    }
+</table>
+
